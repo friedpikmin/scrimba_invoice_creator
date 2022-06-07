@@ -1,0 +1,91 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    color: #FFFFFF;
+    background-color: #1F2937;
+    font-family:Arial, Helvetica, sans-serif;
+}
+button {
+    padding: 10px 15px;
+    background: #D1D4F4;
+    color: #4A4E74;
+    text-align: center;
+    height: 45px;
+    border: 1px solid #D1D4F4;
+    border-radius: 5px;
+    font-style: normal;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/*Header related CSS*/
+header {
+    padding: 25px 50px;
+    background-color: #3A69D2;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 50px;
+    line-height: 5px;
+}
+.thanks{
+    font-size: 10px;
+}
+/*Job buttons*/
+.job-buttons {
+    text-align: center;
+    margin: 20px auto;
+}
+/*work done*/
+.columns{
+    display: flex;
+    justify-content: space-between;
+    color: #D5D4D8;
+    font-size: 12px;
+    margin: 0 20px;
+}
+ul {
+    /*display: flex;*/
+    margin-top: 5px;
+    list-style: none;
+    padding-left: 0;
+}
+hr {
+    margin: 0 20px
+}
+.columns2{
+    display: flex;
+    justify-content: space-between;
+    color: #D5D4D8;
+    font-size: 12px;
+    margin: 0 20px;
+}
+.task-column{
+}
+.total-column{
+    text-align: right;
+}
+#ul-task-el, #ul-amt-el{
+    font-size: 15px;
+    font-weight: bold; 
+}
+li {
+    margin: 10px 0;
+}
+#total-amt-el{
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+/*Buttons*/
+.send-btn{   
+    text-align: center;
+    left: 50%;
+}
+#send-btn{
+    padding: 10px 150px;
+    background: #3A69D2;
+    color: #FFFFFF;
+    height: 45px;
+    border: 1px solid #3A69D2;
+    font-size: 20px;
+}

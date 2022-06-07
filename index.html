@@ -1,0 +1,50 @@
+<html>
+    <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <link rel="stylesheet" href="index.css">
+        <title>Invoice Creator</title>
+    </head>
+    <body>
+        <header>
+            <h1>Invoice Creator</h1>
+            <div class = "thanks">
+                <p>Thank you for choosing Goodcorp, LLC</p>
+            </div>
+        </header>
+        <main>
+            <div class="job-buttons">
+                <button id = "wash-btn">Wash car: $10</button>
+                <button id = "mow-btn">Mow lawn: $20</button>
+                <button id = "pull-btn">Pull weeds: $30</button>
+            </div>
+            <div class="columns">
+                <div class="task-column">
+                    <p>TASK</p>
+                    <div class="task-remove-btn-column">
+                        <ul id="ul-task-el">
+                        </ul>
+                    </div>
+                </div>
+                <div class="total-column">
+                    <p>TOTAL</p>
+                    <ul id="ul-amt-el">
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="columns2">
+                <div class="task-column">
+                    <p>NOTES</p>
+                    <p>We accept cash, credit card, or PayPal.</p>
+                </div>
+                <div class="total-column">
+                    <p>TOTAL AMOUNT</p>
+                    <p id="total-amt-el"></p>
+                </div>
+            </div>
+            <div class ="send-btn">
+                <button id = "send-btn">Send Invoice</button>
+            </div>
+        </main>
+        <script src="index.js"></script>
+    </body>
+</html>
