@@ -1,113 +1,75 @@
-let tasks = []
-let amts = []
-let task = "TEST TASK"
-let total_amt = 0;
-let wash = false;
-let mow = false;
-let pull = false;
-const washBtn = document.getElementById("wash-btn")
-const mowBtn = document.getElementById("mow-btn")
-const pullBtn = document.getElementById("pull-btn")
+const jobBtns = document.getElementById("job-btns")
 const sendBtn = document.getElementById("send-btn")
-const removeBtn = document.getElementById("remove-btn")
+//const removeBtn = document.getElementById("remove-btn")
 const TaskUlEl = document.getElementById("ul-task-el")
 const AmtUlEl = document.getElementById("ul-amt-el")
 const TotalAmtEl = document.getElementById("total-amt-el")
-const wash_amt = 10
-const mow_amt = 20
-const pull_amt = 30
-/*const task =[
-    {name:'Wash car', price:10, id:1}
-    {name:'Mow lawn', price:20, id:2}
-    {name:'Pull weeds', price:30, id:3}
-]*/
-/*listTasks = `
-            <li>
-                <p>
-                    ${task}
-                </p>
-            </li>
-        `
-listAmts = `
-            <li>
-                <p>
-                    ${amt}
-                </p>
-            </li>
-        `
-        
-TaskUlEl.innerHTML = listTasks
-AmtUlEl.innerHTML = listAmts
-*/
+const taskGroup = document.getElementById("tasks")
+const tasks = [
+    {name: "Wash car", price: 10, id: "1"},
+    {name: "Mow lawn", price: 20, id: "2"},
+    {name: "Pull weeds", price: 30, id: "3"}
+]
+const selectedTasks = new Set()
 
-/*Event listeners that check for jobs added. Job can only be added once.*/
-washBtn.addEventListener("click", function() {
-    if (wash === false) {
-        tasks.push("Wash car")
-        amts.push(wash_amt)
-        total_amt += wash_amt
-        console.log(tasks)
-        /*TaskUlEl.textContent = tasks[0]*/
-        render()
-        /*Set to true so it cannot be added again*/
-        wash = true
+/*Render task buttons*/
+for (let task of tasks){
+   jobBtns.innerHTML += `
+            <button value = "${task.id}">
+                ${task.name}: $${task.price} 
+            </button>
+            `
+}
+//Initialize total amount
+TotalAmtEl.textContent = "$" + 0
+
+//Event listeners that check for jobs added. Task can only be added once.
+jobBtns.addEventListener("click", function(e) {
+    const target = e.target
+    if (target.tagName === 'BUTTON'){
+        const obj = tasks.find( task => task.id === target.value)
+        selectedTasks.add(obj)
     }
-})
-mowBtn.addEventListener("click", function() {
-    if (mow === false) {
-        tasks.push("Mow lawn")
-        amts.push(mow_amt)
-        total_amt += mow_amt
-        console.log(tasks)
-        render()
-        /*Set to true so it cannot be added again*/
-        mow = true
-    }
-})
-pullBtn.addEventListener("click", function() {
-    if (pull === false) {
-        tasks.push("Pull weeds")
-        amts.push(pull_amt)
-        total_amt += pull_amt
-        console.log(tasks)
-        render()
-        /*Set to true so it cannot be added again*/
-        pull = true
-    }
+    render(selectedTasks)
 })
 
-/*Clear tasks and amounts when sending invoice. Reinitalize bools*/
+//Send Invoice (Clear)
 sendBtn.addEventListener("click", function() {
-    tasks = []
-    amts = []
-    total_amt = 0
-    wash = false
-    mow = false
-    pull = false
-    render()
+    selectedTasks.clear()
+    render(selectedTasks)
 })
 
+//Delete task from list
+taskGroup.addEventListener("click", function(e) {
+    const target = e.target
+    if (target.tagName === 'BUTTON'){
+        //The html/target ID is prefixed with an 'r'. So we need to remove that in order for target ID = set ID.
+        removeTask(target.id.slice(1))
+        render(selectedTasks)
+    }
+})
 
-/*Render updated screen*/
-function render(){
-    TaskUlEl.textContent = ""
-    AmtUlEl.textContent = ""
-    /*Render out tasks*/
-    for (let i = 0; i < tasks.length; i++){
-            TaskUlEl.innerHTML += `
-            <li>
-                ${tasks[i]}
-            </li>
-        `
+// Remove task from set
+function removeTask(item){
+    selectedTasks.forEach(task => {
+        if(task.id === item) {
+            selectedTasks.delete(task)
+        }
+    })
+}
+// Render updated screen
+function render(tasks){
+    //Initialize task list and amounts
+    let taskList = ""
+    let price = ""
+    let total_amt = 0
+    //List each task and amount
+    for (let task of tasks){
+            taskList += `<li>${task.name} <button id="r${task.id}">remove</button></li>`
+            price += `<li>$${task.price}</li>`
+            total_amt += task.price
     }
-    /*Render out amounts for each task*/
-    for (let j = 0; j < amts.length; j++){
-            AmtUlEl.innerHTML += `
-            <li>
-                $${amts[j]}
-            </li>
-        `
-    }
-    /* Render total amount that needs to be charged*/
+    TaskUlEl.innerHTML = taskList
+    AmtUlEl.innerHTML = price
     TotalAmtEl.textContent = "$" + total_amt
 }
